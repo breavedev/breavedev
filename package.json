@@ -1,0 +1,19 @@
+{
+  "name": "vstupai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edrygka/vstupai.git"
+  },
+  "author": "Eduard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edrygka/vstupai/issues"
+  },
+  "homepage": "https://github.com/edrygka/vstupai#readme"
+}
