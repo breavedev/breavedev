@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/edrygka/vstupai/issues"
   },
-  "homepage": "https://github.com/edrygka/vstupai#readme"
+  "homepage": "https://github.com/edrygka/vstupai#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0"
+  }
 }
