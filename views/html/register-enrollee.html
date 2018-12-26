@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Register enrollee</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+    <script>
+    function regEnrollee(){
+        const fname = document.getElementById('fname').value
+        const lname = document.getElementById('lname').value
+        const passport = document.getElementById('passport').value
+        const math_score = document.getElementById('math_score').value
+        const ukr_score = document.getElementById('ukr_score').value
+        const en_score = document.getElementById('en_score').value
+        const spec = document.getElementById('spec').value
+        const univ = document.getElementById('univ').value
+        const priority = document.getElementById('priority').value
+        let data = {
+            fname: fname, 
+            lname: lname, 
+            passport: passport, 
+            math_score: math_score, 
+            ukr_score: ukr_score, 
+            en_score: en_score,
+            spec: spec,
+            univ: univ,
+            priority: priority
+        }
+        data = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&')
+        fetch('/user-profile/register-enrollee', {method:"POST",mode: "cors",headers: {
+            'Content-Type':'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin':'*'
+        }, body: data}).then(response => {
+            return response.text()
+        }).then(data => {
+            data = JSON.parse(data)
+            console.log(data)
+            if(data.code === 1){
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = data.message;
+            }
+            if(data.code === 0){
+			    document.getElementById('message').style.color = 'green';
+			    document.getElementById('message').innerHTML = data.message;
+				setTimeout(function(){
+				    window.location.replace('/user-profile')
+			    }, 1000)
+		    }
+        })
+    }
+    </script>
+</head>
+    <body>
+        <div class="container">
+            <div class="col-sm-6 col-sm-offset-3">
+    
+                <h1><span class="fa fa-sign-in"></span> Register enrollee</h1><br>
+                <!-- Register enrollee -->
+                <form>
+                    <div class="form-group">
+                        <label>First name</label>
+                        <input type="text" class="form-control" maxlength="20" id="fname" name="fname">
+                    </div>
+                    <div class="form-group">
+                        <label>Last name</label>
+                        <input type="text" class="form-control" maxlength="20" id="lname" name="lname">
+                    </div>
+                    <div class="form-group">
+                        <label>Passport</label>
+                        <input type="text" class="form-control" maxlength="8" id="passport" name="passport">
+                    </div>
+                    <div class="form-group">
+                        <label>Math score</label>
+                        <input type="number" step="0.01" class="form-control" min="100" max="200" id="math_score" name="math_score">
+                    </div>
+                    <div class="form-group">
+                        <label>Ukr score score</label>
+                        <input type="number" step="0.01" class="form-control" min="100" max="200" id="ukr_score" name="ukr_score">
+                    </div>
+                    <div class="form-group">
+                        <label>English score</label>
+                        <input type="number" step="0.01" class="form-control" min="100" max="200" id="en_score" name="en_score">
+                    </div>
+                    <div class="form-group">
+                        <label>Select University</label>
+                        <select id="univ" class="form-control">
+                            <option value="kpi">KPI</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Speciality</label>
+                        <select id="spec" class="form-control">
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                            <option value="System Analysis">System Analysis</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <input type="number" class="form-control" id="priority"  min="1" max="10" name="priority">
+                    </div>
+                    <span id="message"></span><br><br>
+                    <button type="button" id="sub-passwords" onclick="regEnrollee()" class="btn btn-warning btn-lg">Register enrollee</button>
+                </form>
+    
+                <br>
+                <a href="/user-profile/">Back to settings</a>
+                <hr>
+            </div>
+        </div>
+    </body>
+    
+</html>

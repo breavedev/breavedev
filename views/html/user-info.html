@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Vstupai</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <style>
+        body 		{ padding:80px; }
+    </style>
+    <script>
+    let user, token
+    document.addEventListener('DOMContentLoaded', function(event){
+        const email = $.cookie("email")
+
+        fetch(`/user-profile/info?email=${email}`).then(response => {
+            return response.text()
+        }).then(data => {
+            data = JSON.parse(data)
+            let emailstr, fnamestr, lnamestr, mathstr, ukrstr, enstr, passtr
+            user = data.message
+            if(data.code === 1){
+                emailstr = `Email: ---`
+                fnamestr = `First name: ---`
+                lnamestr = `Last name: ---`
+                mathstr = `Mathematic score: ---`
+                ukrstr = `Ukr score: ---`
+                enstr = `English score: ---`
+                passtr = `Passport: ---`
+                document.getElementById('message').style.color = 'red'
+                document.getElementById('message').innerHTML = data.message
+            } else if(data.code === 2){
+                emailstr = `Email: ${user.email}`
+                fnamestr = `First name: ---`
+                lnamestr = `Last name: ---`
+                mathstr = `Mathematic score: ---`
+                ukrstr = `Ukr score: ---`
+                enstr = `English score: ---`
+                passtr = `Passport: ---`
+            } else if(data.code === 0){
+                emailstr = `Email: ${user.email}`
+                fnamestr = `First name: ${user.fname}`
+                lnamestr = `Last name: ${user.lname}`
+                mathstr = `Mathematic score: ${user.math_score}`
+                ukrstr = `Ukr score: ${user.ukr_score}`
+                enstr = `English score: ${user.en_score}`
+                passtr = `Passport: ${user.passport}`
+            }
+            document.getElementById('email').innerText = emailstr
+            document.getElementById('fname').innerText = fnamestr
+            document.getElementById('lname').innerText = lnamestr
+            document.getElementById('math_score').innerText = mathstr
+            document.getElementById('ukr_score').innerText = ukrstr
+            document.getElementById('en_score').innerText = enstr
+            document.getElementById('passport').innerText = passtr
+
+            
+        })
+        
+    })  
+    const validate = (email) => {
+        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+        return expression.test(String(email).toLowerCase())
+    }
+    
+    function changeEmail(){
+        const newEmail = document.getElementById('newemail').value
+        if(validate(newEmail)){
+            let data = {oldemail: user.email, newemail: newEmail}
+            data = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&')
+            fetch('/user-profile/change-email', {method:"POST",mode: "cors",headers: {
+                'Content-Type':'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin':'*'
+            }, body: data}).then(response => {
+                return response.text()
+            }).then(data => {
+                data = JSON.parse(data)
+                console.log(data)
+                if(data.code === 1){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = data.message;
+                }
+                if(data.code === 0){
+				    document.getElementById('message').style.color = 'green';
+				    document.getElementById('message').innerHTML = data.message;
+				    setTimeout(function(){
+					    window.location.replace('/logout')
+				    }, 1000)
+			    }
+            })
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Email is not valid';
+        }
+    }
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <h2>User information</h2>
+        <p align='right'><a class="btn btn-error btn-lg" href="/logout">Logout</a></p>
+    </header>
+    <div id="profile-info-old" class="col-sm-6">
+        <label id="fname"></label><br>
+        <label id="lname"></label><br>
+        <label id="email"></label><br>
+        <label id="math_score"></label><br>
+        <label id="ukr_score"></label><br>
+        <label id="en_score"></label><br>
+        <label id="passport"></label><br>
+    </div>
+    <span id="message"></span>
+    <div id="profile-info" class="col-sm-6">
+        <div class="well" name="droparea" id="upload-form">
+            <h3> Edit credentials </h2>
+                <div class="form-group">
+                    <form>
+                        <div class="form-group">
+                            <label>New email</label>
+                            <input type="email" class="form-control" maxlength="20" id="newemail"> <br>
+                        </div>
+                        <button class="btn btn-success btn-lg" type="button" onclick="changeEmail()">Submit</button>
+                    </form>
+                </div>
+                <span class="text-info" id="message"></span>
+                <br>
+                <div>
+                    <a class="btn btn-default btn-lg" href="/user-profile/change-password">Change password</a>
+                </div>
+                <br>
+                <div><a class="btn btn-default btn-lg" href="/user-profile/register-enrollee">Register enrollee</a></div>
+                <br>
+                <div><a class="btn btn-default btn-lg" href="/user-profile/view-app">View applications</a></div>
+                <br>
+                
+        </div>
+    </div>
+</body>
+
+</html>

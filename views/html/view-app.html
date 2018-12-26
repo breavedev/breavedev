@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Vstupai</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <style>
+        body 		{ padding:80px; }
+    </style>
+    <script>
+        let applications
+        function specSelected(){
+            const spec = document.getElementById("spec").value
+            fetch(`/get-applications?spec=${spec}`).then(response => response.text()).then(data => {
+                data = JSON.parse(data)
+                if(data.code === 1){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = data.message;
+                } else applications = data
+                addTable()
+            })
+        }
+
+        function addTable() {
+              var myTableDiv = document.getElementById("myDynamicTable");
+              myTableDiv.innerHTML = ''
+
+  			var table = document.createElement('TABLE');
+  			table.border = '1';
+
+  			var tableBody = document.createElement('TBODY');
+  			table.appendChild(tableBody);
+			
+			const hight = applications.length
+			//const wigth = Object.keys(applications[0]).length
+  			for (var i = 0; i < hight; i++) {
+    			var tr = document.createElement('TR');
+    			tableBody.appendChild(tr);
+
+    			for (var j = 0; j < 1; j++) {
+      				var td = document.createElement('TD');
+      				//td.width = '75';
+					  td.appendChild(document.createTextNode(`Priority: ${applications[i].priority}, \
+					  First name: ${applications[i].fname}, Last name: ${applications[i].lname},\
+					  Specialization: ${applications[i].name}, Math score: ${applications[i].math_score},\
+					  Ukr Score: ${applications[i].ukr_score}, Eglish Score: ${applications[i].en_score}`));
+      				tr.appendChild(td);
+    			}
+  			}
+  			myTableDiv.appendChild(table);
+        }
+        
+        document.addEventListener("DOMContentLoaded", function(){
+		    
+	    })
+    </script>
+</head>
+
+<body>
+    <header>
+        <h2>Applications</h2>
+        <p align='right'><a href="/user-profile">Back to main menu</a></p>
+    </header>
+    <div id="profile-info" class="col-sm-9">
+        <div class="well">
+            <div class="form-group">
+                <label>Select Speciality</label>
+                <select id="spec" onchange="specSelected()" class="form-control">
+                    <option value="None" selected>---</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="System Analysis">System Analysis</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="profile-info" class="col-sm-9">
+        <div class="well" name="droparea" id="upload-form">
+            <div id="myDynamicTable"></div>
+        </div>
+    </div>
+    <span id="message"></span>
+</body>
+
+</html>

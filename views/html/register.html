@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Vstupai</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+    <script>
+        const check = function() {
+            if (document.getElementById('password').value == document.getElementById('repassword').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Passwords matching';
+                document.getElementById('submit').disabled = false
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Passwords not matching';
+                document.getElementById('submit').disabled = true
+            }
+            if(document.getElementById('password').value.length < 6){
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Password is too small';
+                document.getElementById('submit').disabled = true
+            }
+        }
+        function register(){
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            let data = {email: email, password: password}
+            data = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&')
+            fetch('/register', {method:"POST",mode: "cors",headers: {
+                'Content-Type':'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin':'*'
+            }, body: data}).then(response => response.text()).then(data => {
+                const result = JSON.parse(data)
+                if(result.code === 1){
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = result.message;
+                }
+                if(result.code === 0){
+				    document.getElementById('message').style.color = 'green';
+				    document.getElementById('message').innerHTML = result.message;
+				    setTimeout(function(){
+					    window.location.replace('/verification')
+				    }, 1000)
+			    }
+            })
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <h1><span class="fa fa-sign-in"></span> Register</h1>
+            <!-- REGISTER FORM -->
+            <form>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" class="form-control" maxlength="20" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" maxlength="30" id="password" name="password" onkeyup="check();">
+                </div>
+                <div class="form-group">
+                    <label>Repeat password</label>
+                    <input type="password" class="form-control" maxlength="30" id="repassword" name="repassword" onkeyup="check();">
+                </div>
+                <span id="message"></span><br><br>
+                <button type="button" id='submit' class="btn btn-warning btn-lg" onclick="register()">Register</button>
+            </form>
+
+            <hr>
+
+            <p>Back to login page? <a href="/login">Login</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

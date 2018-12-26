@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Vstupai</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+    <script>
+    function verif(){
+
+    }
+
+    function login(){
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        let data = {email: email, password: password}
+        data = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&')
+        fetch('/login', {method:"POST",mode: "cors",headers: {
+                'Content-Type':'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin':'*'
+        }, body: data}).then(response => response.text()).then(data => {
+            const result = JSON.parse(data)
+            if(result.code === 1){
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = result.message;
+            }
+            if(result.code === 0){
+				document.getElementById('message').style.color = 'green';
+				document.getElementById('message').innerHTML = result.message;
+				setTimeout(function(){
+					window.location.replace('/user-profile')
+				}, 1000)
+			}
+        })
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <h1><span class="fa fa-sign-in"></span> Login</h1>
+            <!-- LOGIN FORM -->
+            <form>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" maxlength="20" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" minlength="6" id="password" name="password">
+                </div>
+                <button type="button" class="btn btn-warning btn-lg" onclick="login()">Login</button><br>
+            </form>
+            
+            <br>
+            <span id="message"></span>
+
+            <hr>
+
+            <p>Need an account? <a href="/register">Register</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
