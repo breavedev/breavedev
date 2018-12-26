@@ -8,10 +8,8 @@
     <style>
         body 		{ padding-top:80px; }
     </style>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
-    function verif(){
-
-    }
 
     function login(){
         const email = document.getElementById('email').value
@@ -53,6 +51,7 @@
                     <label>Password</label>
                     <input type="password" class="form-control" minlength="6" id="password" name="password">
                 </div>
+                <div class="g-recaptcha" data-sitekey="6Lct3X8UAAAAABzChzryrJhmy0nN18AFvxAMW_Bv"></div><br>
                 <button type="button" class="btn btn-warning btn-lg" onclick="login()">Login</button><br>
             </form>
             

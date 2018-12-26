@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const bcrypt = require('bcrypt')
+const fetch = require('node-fetch')
 const verification = require('./lib/verification')
 
 const mysql = require('mysql')
@@ -35,6 +36,14 @@ module.exports = app => {
     const password = String(req.body.password)
 
     //TODO: check for right fields email and password
+    fetch('https://www.google.com/recaptcha/api/siteverify',{
+      method: 'POST',
+      body:  `secret=6Lct3X8UAAAAAIBOov7IWKrijn0Ku2vu40GDe6uj&response=${req.body['g-recaptcha-response']}`,
+      headers: {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
+    }).then(function(response){
+      return response.json()
+    }).then(function(data){
+    })
 
     db.query('SELECT * FROM users WHERE email=?', [email], (err, result) => {
       if(err) return next(err)
@@ -69,6 +78,14 @@ module.exports = app => {
     const password = String(req.body.password)
 
     //TODO: check for right fields email and password
+    fetch('https://www.google.com/recaptcha/api/siteverify',{
+      method: 'POST',
+      body:  `secret=6Lct3X8UAAAAAIBOov7IWKrijn0Ku2vu40GDe6uj&response=${req.body['g-recaptcha-response']}`,
+      headers: {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
+    }).then(function(response){
+      return response.json()
+    }).then(function(data){
+    })
 
     db.query('SELECT * FROM users WHERE email=?', [email], (err, result) => {
       if(err) return next(err)

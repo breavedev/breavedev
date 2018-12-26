@@ -8,6 +8,7 @@
     <style>
         body 		{ padding-top:80px; }
     </style>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         const check = function() {
             if (document.getElementById('password').value == document.getElementById('repassword').value) {
@@ -70,7 +71,8 @@
                     <label>Repeat password</label>
                     <input type="password" class="form-control" maxlength="30" id="repassword" name="repassword" onkeyup="check();">
                 </div>
-                <span id="message"></span><br><br>
+                <div class="g-recaptcha" data-sitekey="6Lct3X8UAAAAABzChzryrJhmy0nN18AFvxAMW_Bv"></div><br>
+                <span id="message"></span><br>
                 <button type="button" id='submit' class="btn btn-warning btn-lg" onclick="register()">Register</button>
             </form>
 
