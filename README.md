@@ -10,10 +10,14 @@ Bringing forth expertise in design, testing and maintenance of blockchain system
 
 ✨ Plus ✨
 in Addition, let me list my expert skills for blockchain development
-⚡I have great experience in Cryptocurrency and NFT with many tokens such as **ERC20**, **ERC721**, **ERC1155**, **ERC4337**, BEP20, BEP721, BEP1155.\n
-⚡I have 2+ years of experience in building a new chain using **Cosmos SDK**.\n
-⚡I have deep knowledge in contract development languages such as **Solidity**, **Golang** and **Rust**.\n
-⚡I have the technical know-how to prevent from attacting and have good knowledge to reduce fas fee.\n
+⚡I have great experience in Cryptocurrency and NFT with many tokens such as **ERC20**, **ERC721**, **ERC1155**, **ERC4337**, BEP20, BEP721, BEP1155.
+
+⚡I have 2+ years of experience in building a new chain using **Cosmos SDK**.
+
+⚡I have deep knowledge in contract development languages such as **Solidity**, **Golang** and **Rust**.
+
+⚡I have the technical know-how to prevent from attacting and have good knowledge to reduce fas fee.
+
 ⚡I have rich experience in contract and websiet development NFT-marketplace, Dex, Defi, Dex, Farming, Staking .
 
 <!--
