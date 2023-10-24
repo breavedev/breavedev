@@ -2,7 +2,7 @@
 
                                                    Senior  Software  Engineer
 
-A highly skilled Senior Software Engineer with over 8 years of expertise in designing, developing, deploying, and maintaining complex software applications. Proficient in various programming languages, frameworks, and blockchain technologies including JavaScript, **Typescript**, **Node.js**, **React.js**, Vue.js, Angular.js, **Ethereum**, **Solidity**, **Golang** and **Cosmos SDK**.
+A highly skilled Senior Software Engineer with over 5+ years of expertise in designing, developing, deploying, and maintaining complex software applications. Proficient in various programming languages, frameworks, and blockchain technologies including JavaScript, **Typescript**, **Node.js**, **React.js**, Vue.js, Angular.js, **Ethereum**, **Solidity**, **Golang** and **Cosmos SDK**.
 Especially have hands-on experience in building a new **Layer 1 chain** called **BlockX** powering **Cosmos SDK** and **Golang**.
 Skilled in managing the entire software development lifecycle, from ideation to production deployment, utilizing Agile methodologies. 
 Excellent teamwork skills, collaborate closely with the development team, and independently have rich experience writing reusable, testable, and eﬃcient code. 
