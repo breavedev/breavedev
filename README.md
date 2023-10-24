@@ -11,13 +11,15 @@ Bringing forth expertise in design, testing and maintenance of blockchain system
 Able to eﬀectively self-manage during independent projects, as well as collaborate in a team setting.
 
 ✨ Blockchain Skills ✨
+
 Let me list my expert skills for blockchain development.
-⚡I have great experience in Cryptocurrency and NFT with many tokens such as **ERC20**, **ERC721**, **ERC1155**, **ERC4337**, BEP20, BEP721, BEP1155.
+
+⚡I have great experience in Cryptocurrency and NFT with many token standards such as **ERC20**, **ERC721**, **ERC1155**, **ERC4337**, BEP20, BEP721, BEP1155.
+
+⚡I have rich experience in contract and website development like **NFT-marketplace**, **Dex**, **Defi**, **Dex**, **Farming** and **Staking**.
 
 ⚡I have 2+ years of experience in building a new chain using **Cosmos SDK**.
 
 ⚡I have deep knowledge in smart contract development languages such as **Solidity**, **Golang** and **Rust**.
 
-⚡I have the technical know-how to prevent from attacting and have good knowledge to reduce **gas fees**.
-
-⚡I have rich experience in contract and website development like **NFT-marketplace**, **Dex**, **Defi**, **Dex**, **Farming** and **Staking**.
+⚡I have the technical know-how to prevent security vulnerabilities and have good knowledge to reduce **gas fees**.
