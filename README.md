@@ -1,3 +1,4 @@
 Software Engineer with 5 years of expertise in designing, developing, deploying, and maintaining complex software applications. 
-Proficient in various programming languages, frameworks, and blockchain technologies including **JavaScript**, **Typescript**, **Node.js**, **React.js**, Vue.js, Angular.js, **Ethereum**, **Solidity**, **Golang** and **Cosmos SDK**.
+Have hands-on experience in developing **Defi**/**Dex**, **Game NFT marketplace** and other **dApps** using **Solidity**, **React.js**, **Web3.js**, **Ethers.js**, **Hardhat**, **Truffle** and other tools.
 Experience in building a new **Layer 1 chain** called **BlockX** powering **Cosmos SDK** and **Golang**.
+Ready to apply my passion for talented startup companies.
